@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>복권 번호 추첨기</title>
+</head>
+<body>
+    
+    <canvas id="canvas" width="400" height="400"></canvas>
+
+    <script type="importmap">
+        {
+            "imports": {
+              "three": "https://unpkg.com/three@0.141.0/build/three.module.js",
+              "GLTFLoader" : "https://unpkg.com/three@0.141.0/examples/jsm/loaders/GLTFLoader.js"
+            }
+          }
+    </script>
+
+    <script type="module">
+        import {GLTFLoader} from 'GLTFLoader';
+        import * as THREE from 'three';
+
+        let scene = new THREE.Scene();
+        let renderer = new THREE.WebGLRenderer({
+            canvas : document.querySelector('#canvas'),
+            antialias : true
+        });
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        
+        let camera = new THREE.PerspectiveCamera(100,1);
+        camera.position.set(0,0,5);
+
+        scene.background = new THREE.Color('white');
+        // let light = new THREE.DirectionalLight(0xffff00, 10);
+        // scene.add(light);
+
+        function addLight(){
+            var ambientLight = new THREE.AmbientLight(0xcccccc);
+            scene.add(ambientLight);
+        };
+        addLight();
+
+        let loader = new GLTFLoader();
+        loader.load('shiba/scene.gltf', function(gltf){
+            scene.add(gltf.scene);
+
+            function animate() {
+            requestAnimationFrame(animate)
+            gltf.scene.rotation.y -= 0.03;
+            gltf.scene.rotation.x -= 0.02;
+            renderer.render(scene, camera);
+            }
+            animate()
+        });
+    </script>
+</body>
+</html>
