@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쿵쿵따</title>
+</head>
+
+<body>
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+
+  <!-- 쿵쿵따 
+  1) 세글자 고정. 아니면 다시 입력하라 표시
+  2) 참가인원 취소시 다음 코드 실행 안됨 -->
+  <script>
+    let peopleNum = Number(prompt('참가인원을 입력하세요.'));
+    const $order = document.querySelector('#order');
+    const $word = document.querySelector('#word');
+    const $input = document.querySelector('input');
+    const $button = document.querySelector('button');
+    let newWord; // 입력한 단어
+    let word; // 제시어
+
+    if (peopleNum) { // peopleNum 이 false면 다음 전체 코드 실행 안됨
+      const onInput = (event) => {
+        newWord = event.target.value;
+      };
+
+      const onClickButton = () => {
+        if (newWord.length !== 3) {
+          // 입력글자가 3글자가 아닐때
+          alert('3글자를 입력해야 합니다.');
+        } else {
+          // 입력글자가 3글자 일때
+          if (!word || word[word.length - 1] === newWord[0]) {
+            // 제시어가 비어있거나 입력단어의 첫글자와 제시어의 끝글자가 동일하면
+            word = newWord;
+            $word.textContent = word;
+            const order = Number($order.textContent); // 현재순서
+            if (order + 1 > peopleNum) { // 현재순서가 참가인원보다 큰가?
+              $order.textContent = 1;
+            } else {
+              $order.textContent = order + 1;
+            }
+          } else {
+            // 제시어가 있고, 제시어 끝 글자와 입력단어 첫 글자가 동일하지 않을 때
+            alert('올바른 단어가 아닙니다!');
+          }
+        }
+        $input.value = '';
+        $input.focus();
+      };
+
+      $input.addEventListener('input', onInput);
+      $button.addEventListener('click', onClickButton);
+    }
+
+  </script>
+</body>
+
+</html>
