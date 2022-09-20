@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 350px;
+  height: 400px;
+  border-radius: 10px;
+  background-color: #EDEEF5;
+  margin: 20px auto;
+}
+
+.colorBox {
+  position: relative;
+  top: 20px;
+  margin: auto;
+  width: 310px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #739FB2;
+}
+
+.colorValue {
+  position: relative;
+  top: 260px;
+  color: white;
+  opacity: 0;
+  background-color: #588291;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+.colorBox:hover .colorValue {
+  opacity: 1;
+}
+
+.heartBtn {
+  padding: 10px;
+  font-size: 15px;
+  border: 2px solid #A8A9B0;
+  border-radius: 10px;
+
+}
+
+.bottomContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
